@@ -18,15 +18,14 @@ services:
 
   dashboard:
     image: ghcr.io/saleor/saleor-dashboard:3.20.5
-    restart: unless-stopped
+    restart: always
     ports:
       - 9002:80
-        #aaaaaaa
-        ##aaaaaaa
+        #  port 9002
 
   db:
     image: library/postgres:15-alpine
-    restart: unless-stopped
+    restart: always
     volumes:
       - saleor-db:/var/lib/postgresql/data
     environment:
@@ -35,7 +34,7 @@ services:
 
   redis:
     image: library/redis:7.0-alpine
-    restart: unless-stopped
+    restart: always
     volumes:
       - saleor-redis:/data
 
@@ -44,7 +43,7 @@ services:
     ports:
       - "1025" # SMTP Server
       - "8025" # Mailpit UI
-    restart: unless-stopped
+    restart: always
 
 volumes:
   saleor-db:
