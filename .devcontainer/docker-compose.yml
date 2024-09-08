@@ -22,6 +22,7 @@ services:
     ports:
       - 9002:80
 
+
   db:
     image: library/postgres:15-alpine
     restart: unless-stopped
