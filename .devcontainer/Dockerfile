@@ -27,3 +27,18 @@ RUN poetry config virtualenvs.create false
 COPY vendored/ /app/vendored/
 COPY poetry.lock pyproject.toml /app/
 RUN poetry install --no-root
+
+# Create a non-root user
+#RUN addgroup -S saleorgroup && adduser -S saleoruser -G saleorgroup
+
+# Set permissions for the /app directory
+#RUN chown -R saleoruser:saleorgroup /app
+
+# Switch to the non-root user
+#USER saleoruser
+
+FROM alpine:latest
+RUN apk add --no-cache shadow
+RUN addgroup -S saleorgroup && adduser -S saleoruser -G saleorgroup
+USER saleoruser
+
